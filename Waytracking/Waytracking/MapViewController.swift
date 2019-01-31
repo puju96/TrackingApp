@@ -16,6 +16,11 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         mapview.userTrackingMode = .follow
+        
+        let annotations = LocationStorage.shared.locations.map{annotationForLocation($0)}
+        mapview.addAnnotations(annotations)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(newLocationStarted(_:)), name: .newLocationSaved, object: nil)
     }
 
     @IBAction func addLocationTapped(_ sender: Any) {
@@ -23,6 +28,24 @@ class MapViewController: UIViewController {
         guard let currentLocation = mapview.userLocation.location else {return}
         
         LocationStorage.shared.saveCLLocationOnDisk(currentLocation)
+    }
+    
+    func annotationForLocation(_ location : Location) -> MKAnnotation{
+        let annotation = MKPointAnnotation()
+        annotation.title = location.dateString
+        annotation.coordinate = location.coordinates
+        return annotation
+        
+    }
+    
+   @objc func newLocationStarted(_ notification : Notification) {
+        guard let location = notification.userInfo?["location"] as? Location else {
+            return
+        }
+        
+        let annotation  = annotationForLocation(location)
+        mapview.addAnnotation(annotation)
+        
     }
     
 }

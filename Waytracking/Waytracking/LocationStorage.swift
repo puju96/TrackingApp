@@ -57,6 +57,8 @@ class LocationStorage {
        try! data.write(to: fileURL)
         
         locations.append(location)
+        
+        NotificationCenter.default.post(name: .newLocationSaved, object: self, userInfo: ["location" : location])
     }
     
     func saveCLLocationOnDisk(_ cllocation : CLLocation){
@@ -74,4 +76,8 @@ class LocationStorage {
         
         
     }
+}
+
+extension Notification.Name {
+    static let newLocationSaved = Notification.Name(rawValue: "newLocationSaved")
 }

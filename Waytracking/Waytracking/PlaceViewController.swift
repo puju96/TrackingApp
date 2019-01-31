@@ -16,14 +16,21 @@ class PlaceViewController: UIViewController {
         TableView.dataSource = self
         TableView.delegate = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(newLocationSaved(_ :)), name: .newLocationSaved, object: nil)
+        
     }
+    @objc func newLocationSaved(_ notification : Notification) {
+        TableView.reloadData()
+        
+    }
+    
 }
 
 extension PlaceViewController : UITableViewDelegate , UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return LocationStorage.shared.locations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -31,8 +38,7 @@ extension PlaceViewController : UITableViewDelegate , UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "placeCell", for: indexPath) as? PlaceCell else { return UITableViewCell()}
         let location = LocationStorage.shared.locations[indexPath.row]
         
-        print("description : \(location.description)")
-         print("description : \(location.dateString)")
+         
         
         cell.initData(placeDetail: location.description, dateString: location.dateString)
         return cell
