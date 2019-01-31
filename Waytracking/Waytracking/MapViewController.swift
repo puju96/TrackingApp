@@ -19,6 +19,10 @@ class MapViewController: UIViewController {
     }
 
     @IBAction func addLocationTapped(_ sender: Any) {
+        
+        guard let currentLocation = mapview.userLocation.location else {return}
+        
+        LocationStorage.shared.saveCLLocationOnDisk(currentLocation)
     }
     
 }

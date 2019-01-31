@@ -29,6 +29,12 @@ extension PlaceViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "placeCell", for: indexPath) as? PlaceCell else { return UITableViewCell()}
+        let location = LocationStorage.shared.locations[indexPath.row]
+        
+        print("description : \(location.description)")
+         print("description : \(location.dateString)")
+        
+        cell.initData(placeDetail: location.description, dateString: location.dateString)
         return cell
        
     }

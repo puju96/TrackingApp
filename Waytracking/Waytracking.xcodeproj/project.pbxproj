@@ -30,6 +30,7 @@
 		189025DC22001D3F000BD171 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		189025DE22001D51000BD171 /* LocationStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStorage.swift; sourceTree = "<group>"; };
 		189025E02200278A000BD171 /* PlaceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceCell.swift; sourceTree = "<group>"; };
+		18B9E44A22015E44004DA4A1 /* Route.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Route.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +47,7 @@
 		189025BC2200183C000BD171 = {
 			isa = PBXGroup;
 			children = (
+				18B9E44A22015E44004DA4A1 /* Route.gpx */,
 				189025C72200183C000BD171 /* Waytracking */,
 				189025C62200183C000BD171 /* Products */,
 			);
@@ -108,6 +110,11 @@
 				TargetAttributes = {
 					189025C42200183C000BD171 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};

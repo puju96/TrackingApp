@@ -10,15 +10,18 @@ import UIKit
 
 class PlaceCell: UITableViewCell {
 
+    @IBOutlet weak var dateLable: UILabel!
+    @IBOutlet weak var TitleLable: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func  initData(placeDetail : String , dateString : String)
+   {
+    TitleLable.text = placeDetail
+    dateLable.text = dateString
+    
     }
 
 }
